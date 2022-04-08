@@ -1,11 +1,14 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthStack from './AuthStack';
+import {Provider as PaperProvider} from 'react-native-paper';
 
 const Routes = () => {
   return (
     <NavigationContainer>
-      <AuthStack />
+      <PaperProvider>
+        <AuthStack />
+      </PaperProvider>
     </NavigationContainer>
   );
 };
