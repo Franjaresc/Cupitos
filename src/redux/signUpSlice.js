@@ -9,6 +9,12 @@ const initialState = {
   carPlate: '',
   carModel: '',
   carColor: '',
+  telephone: '',
+  description: '',
+  career: '',
+  code: '',
+  hidePassword: true,
+  hidePasswordConfirmation: true,
 };
 
 const signUpSlice = createSlice({
@@ -39,6 +45,24 @@ const signUpSlice = createSlice({
     changeCarColor: (state, action) => {
       state.carColor = action.payload;
     },
+    changeTelephone: (state, action) => {
+      state.telephone = action.payload;
+    },
+    changeDescription: (state, action) => {
+      state.description = action.payload;
+    },
+    changeCareer: (state, action) => {
+      state.career = action.payload;
+    },
+    changeCode: (state, action) => {
+      state.code = action.payload;
+    },
+    changeHidePassword: (state, action) => {
+      state.hidePassword = action.payload;
+    },
+    changeHidePasswordConfirmation: (state, action) => {
+      state.hidePasswordConfirmation = action.payload;
+    },
   },
 });
 
@@ -51,6 +75,12 @@ export const {
   changeCarPlate,
   changeCarModel,
   changeCarColor,
+  changeTelephone,
+  changeDescription,
+  changeCareer,
+  changeCode,
+  changeHidePassword,
+  changeHidePasswordConfirmation,
 } = signUpSlice.actions;
 
 export default signUpSlice.reducer;

@@ -12,6 +12,12 @@ import {
   changeCarPlate,
   changeCarModel,
   changeCarColor,
+  changeTelephone,
+  changeDescription,
+  changeCareer,
+  changeCode,
+  changeHidePassword,
+  changeHidePasswordConfirmation,
 } from '../redux/signUpSlice';
 import {signUp} from '../redux/userSlice';
 
@@ -27,6 +33,14 @@ const SignUp = ({navigation}) => {
   const carPlate = useSelector(state => state.signUp.carPlate);
   const carModel = useSelector(state => state.signUp.carModel);
   const carColor = useSelector(state => state.signUp.carColor);
+  const telephone = useSelector(state => state.signUp.telephone);
+  const description = useSelector(state => state.signUp.description);
+  const career = useSelector(state => state.signUp.career);
+  const code = useSelector(state => state.signUp.code);
+  const hidePassword = useSelector(state => state.signUp.hidePassword);
+  const hidePasswordConfirmation = useSelector(
+    state => state.signUp.hidePasswordConfirmation,
+  );
 
   const onCheck = value => {
     dispatch(dispatch(isDriver(value)));
@@ -68,7 +82,11 @@ const SignUp = ({navigation}) => {
       name !== '' &&
       email !== '' &&
       password !== '' &&
-      passwordConfirmation !== ''
+      passwordConfirmation !== '' &&
+      code !== '' &&
+      description !== '' &&
+      career !== '' &&
+      telephone !== ''
     ) {
       if (password === passwordConfirmation) {
         const data = {
@@ -79,6 +97,11 @@ const SignUp = ({navigation}) => {
           carPlate,
           carModel,
           carColor,
+          isDriverCheck,
+          telephone,
+          description,
+          career,
+          code,
         };
         dispatch(signUp(data));
       } else {
@@ -89,67 +112,108 @@ const SignUp = ({navigation}) => {
 
   return (
     <ScrollView contentContainerStyle={Styles.scrollView}>
-      <View style={Styles.container}>
-        <TextInput
-          label="Name"
-          mode="outlined"
-          style={Styles.input}
-          onChangeText={text => dispatch(changeName(text))}
-          value={name}
-        />
-        <TextInput
-          label="Email"
-          mode="outlined"
-          style={Styles.input}
-          onChangeText={text => dispatch(changeEmail(text))}
-          value={email}
-        />
-        <TextInput
-          label="Password"
-          secureTextEntry
-          mode="outlined"
-          right={<TextInput.Icon name="eye" />}
-          style={Styles.input}
-          onChangeText={text => dispatch(changePassword(text))}
-          value={password}
-        />
-        <TextInput
-          label="Confirm Password"
-          secureTextEntry
-          mode="outlined"
-          right={<TextInput.Icon name="eye" />}
-          style={Styles.input}
-          onChangeText={text => dispatch(changePasswordConfirmation(text))}
-          value={passwordConfirmation}
-        />
-        <Text style={Styles.text}>Deseo registrarme como:</Text>
-        <RadioButton.Group
-          onValueChange={value => onCheck(value)}
-          value={isDriverCheck}>
-          <RadioButton.Item
-            label="Cliente"
-            value={false}
-            style={Styles.radioButton}
+      <TextInput
+        label="Nombre"
+        mode="outlined"
+        style={Styles.input}
+        onChangeText={text => dispatch(changeName(text))}
+        value={name}
+      />
+      <TextInput
+        label="Email"
+        mode="outlined"
+        style={Styles.input}
+        onChangeText={text => dispatch(changeEmail(text))}
+        value={email}
+      />
+      <TextInput
+        label="Contraseña"
+        secureTextEntry={hidePassword}
+        mode="outlined"
+        right={
+          <TextInput.Icon
+            name={hidePassword ? 'eye' : 'eye-off'}
+            onPress={() => dispatch(changeHidePassword(!hidePassword))}
           />
-          <RadioButton.Item
-            label="Conductor"
-            value={true}
-            style={Styles.radioButton}
+        }
+        style={Styles.input}
+        onChangeText={text => dispatch(changePassword(text))}
+        value={password}
+      />
+      <TextInput
+        label="Confirmar contraseña"
+        secureTextEntry={hidePasswordConfirmation}
+        mode="outlined"
+        right={
+          <TextInput.Icon
+            name={hidePasswordConfirmation ? 'eye' : 'eye-off'}
+            onPress={() =>
+              dispatch(
+                changeHidePasswordConfirmation(!hidePasswordConfirmation),
+              )
+            }
           />
-        </RadioButton.Group>
-        {driverComponent(isDriverCheck)}
-        <Button
-          mode="contained"
-          onPress={() => onPressSignUp()}
-          style={Styles.logginButton}>
-          Sign Up
+        }
+        style={Styles.input}
+        onChangeText={text => dispatch(changePasswordConfirmation(text))}
+        value={passwordConfirmation}
+      />
+      <TextInput
+        label="Telefono"
+        mode="outlined"
+        style={Styles.input}
+        onChangeText={text => dispatch(changeTelephone(text))}
+        value={telephone}
+      />
+      <TextInput
+        label="Descripción"
+        mode="outlined"
+        multiline={true}
+        style={Styles.inputMultiline}
+        onChangeText={text => dispatch(changeDescription(text))}
+        value={description}
+      />
+      <TextInput
+        label="Carrera"
+        mode="outlined"
+        style={Styles.input}
+        onChangeText={text => dispatch(changeCareer(text))}
+        value={career}
+      />
+      <TextInput
+        label="Codigo"
+        mode="outlined"
+        style={Styles.input}
+        onChangeText={text => dispatch(changeCode(text))}
+        value={code}
+      />
+      <Text style={Styles.textSignUp}>Deseo registrarme como:</Text>
+      <RadioButton.Group
+        onValueChange={value => onCheck(value)}
+        value={isDriverCheck}>
+        <RadioButton.Item
+          label="Cliente"
+          value={false}
+          style={Styles.radioButton}
+        />
+        <RadioButton.Item
+          label="Conductor"
+          value={true}
+          style={Styles.radioButton}
+        />
+      </RadioButton.Group>
+      {driverComponent(isDriverCheck)}
+      <Button
+        mode="contained"
+        onPress={() => onPressSignUp()}
+        style={Styles.logginButton}>
+        Sign Up
+      </Button>
+      <View style={Styles.containerRowCenter}>
+        <Text>Already have an account?</Text>
+        <Button mode="text" onPress={() => navigation.navigate('Login')}>
+          Login
         </Button>
-        <View style={Styles.containerRowCenter}>
-          <Text>Already have an account?</Text>
-          <Button mode="text" onPress={() => navigation.navigate('Login')}>
-            Login
-          </Button>
-        </View>
       </View>
     </ScrollView>
   );

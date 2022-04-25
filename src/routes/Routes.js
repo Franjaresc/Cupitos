@@ -3,18 +3,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
 import {Provider as PaperProvider} from 'react-native-paper';
-import store from '../redux/store';
-import {Provider} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const Routes = () => {
+  const user = useSelector(state => state.user.user);
+  console.log(user);
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <PaperProvider>
-          <AuthStack />
-        </PaperProvider>
-      </NavigationContainer>
-    </Provider>
+    <NavigationContainer>
+      <PaperProvider>{user ? <AppStack /> : <AuthStack />}</PaperProvider>
+    </NavigationContainer>
   );
 };
 

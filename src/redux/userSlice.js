@@ -6,6 +6,7 @@ const initialState = {
   error: null,
   user: null,
 };
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -52,9 +53,9 @@ export const signUp = user => dispatch => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "email": user.email,
-      "password": user.password,
-      "returnSecureToken": true,
+      'email': user.email,
+      'password': user.password,
+      'returnSecureToken': true,
     }),
   })
     .then(
@@ -62,13 +63,12 @@ export const signUp = user => dispatch => {
         if (response.ok) {
           return response.json();
         }
-        console.log('response', response);
         console.log('response', response.status);
         throw new Error('Error al crear usuario');
       },
       error => {
         dispatch(userSlice.actions.signUpFailure(error.message));
-      },
+      }
     )
     .then(response => {
       return fetch(`${urlDatabaseCreateUser}/${response.localId}.json`, {
@@ -76,39 +76,98 @@ export const signUp = user => dispatch => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(
-          {
-            "email": user.email,
-            "name": user.name,
-            "password": user.password,
-            "carPlate": user.carPlate,
-            "carModel": user.carModel,
-            "carColor": user.carColor,
-            "driver": user.driver,
+        body: JSON.stringify({
+          'email': user.email,
+          'name': user.name,
+          'password': user.password,
+          'carPlate': user.carPlate,
+          'carModel': user.carModel,
+          'carColor': user.carColor,
+          'isDriver': user.isDriverCheck,
+          'telephone': user.telephone,
+          'description': user.description,
+          'career': user.career,
+          'code': user.code,
+        }),
+      })
+        .then(
+          r => {
+            if (r.ok) {
+              console.log('Usuario creado');
+              return r.json();
+            }
+            console.log('response', r.status);
+            throw new Error('Error al crear usuario');
           },
-        ),
-      }).then(
-        response => {
-          if (response.ok) {
-            console.log('Usuario creado');
-            console.log(response.json());
-            return response.json();
+          error => {
+            dispatch(userSlice.actions.signUpFailure(error.message));
           }
-          console.log('response', response);
-          console.log('response', response.status);
-          throw new Error('Error al crear usuario');
-        },
-        error => {
+        )
+        .then(res => {
+          console.log('User', res);
+          dispatch(userSlice.actions.signUpSuccess(response));
+        })
+        .catch(error => {
           dispatch(userSlice.actions.signUpFailure(error.message));
-        },
-      );
-    })
-    .then(response => {
-      dispatch(userSlice.actions.signUpSuccess(response));
+        });
     })
     .catch(error => {
-      dispatch(userSlice.actions.signUpFailure(error));
+      dispatch(userSlice.actions.signUpFailure(error.message));
     });
 };
+
+
+export const login = user => dispatch => {
+  dispatch(userSlice.actions.loginRequest());
+  console.log('login', user);
+  const urlLogin = `${baseUrlAuth}signInWithPassword?key=${apiKey}`;
+  console.log('loginURL', urlLogin);
+  return fetch(urlLogin, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'email': user.email,
+      'password': user.password,
+      'returnSecureToken': true,
+    }),
+  })
+    .then(
+      response => {
+        if (response.ok) {
+          return response.json();
+        }
+        console.log('response', response.status);
+        throw new Error('Error al iniciar sesión');
+      },
+      error => {
+        dispatch(userSlice.actions.loginFailure(error.message));
+      }
+    )
+    .then(response => {
+      fetch(`${baseUrlDatabase}/Users/${response.localId}.json`)
+        .then(
+          r => {
+            if (r.ok) {
+              return r.json();
+            }
+            console.log('response', r.status);
+            throw new Error('Error al iniciar sesión');
+          },
+          error => {
+            dispatch(userSlice.actions.loginFailure(error.message));
+          }
+        )
+        .then(res => {
+          console.log('user', res);
+          dispatch(userSlice.actions.loginSuccess(res));
+        })
+    })
+    .catch(error => {
+      dispatch(userSlice.actions.loginFailure(error.message));
+    });
+};
+
 
 export default userSlice.reducer;

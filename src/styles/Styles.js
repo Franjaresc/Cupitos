@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 const Styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
@@ -13,9 +12,14 @@ const Styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
   },
+  inputMultiline: {
+    margin: 10,
+    width: '80%',
+    alignSelf: 'center',
+  },
   logo: {
     marginTop: 50,
-    marginBottom: 50,
+    marginBottom: 20,
     alignSelf: 'center',
   },
   logginButton: {
@@ -24,6 +28,23 @@ const Styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
     justifyContent: 'center',
+  },
+  scrollView: {
+    flexGrow: 1,
+    backgroundColor: '#fff',
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  radioButton: {
+    alignSelf: 'center',
+    height: 50,
+    width: '80%',
+  },
+  textSignUp: {
+    textAlign: 'justify',
+    fontSize: 15,
+    marginBottom: 10,
+    alignSelf: 'center',
   },
   containerRow: {
     marginTop: 10,
@@ -75,20 +96,12 @@ const Styles = StyleSheet.create({
   },
   text: {
     textAlign: 'justify',
+    fontSize: 15,
+    marginBottom: 10,
   },
   textBody: {
     textAlign: 'justify',
     fontSize: 20,
-  },
-  radioButton: {
-    alignSelf: 'center',
-    height: 50,
-    width: '80%',
-  },
-  scrollView: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    backgroundColor: '#fff',
   },
   editButton: {
     margin: 0,
