@@ -25,13 +25,13 @@ const Login = ({navigation}) => {
         style={Styles.logginButton}>
         Login
       </Button>
-      <View style={Styles.containerRow}>
+      <View style={Styles.containerRowCenter}>
         <Text>Don't have an account?</Text>
         <Button mode="text" onPress={() => navigation.navigate('Signup')}>
           Sign Up
         </Button>
       </View>
-      <View style={Styles.containerRow}>
+      <View style={Styles.containerRowCenter}>
         <Text>Forgot your password?</Text>
         <Button
           mode="text"
