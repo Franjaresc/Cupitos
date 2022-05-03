@@ -1,6 +1,7 @@
 import React from 'react';
 import {BottomNavigation, Text} from 'react-native-paper';
 import ProfileComponent from '../components/ProfileComponent';
+import HomeComponent from '../components/HomeComponent';
 import {useSelector, useDispatch} from 'react-redux';
 import {onIndexChange} from '../redux/bottomNavigationSlice';
 
@@ -8,7 +9,6 @@ const MusicRoute = () => <Text>Music</Text>;
 
 const AlbumsRoute = () => <Text>Albums</Text>;
 
-const RecentsRoute = () => <Text>Recents</Text>;
 
 const AppStack = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const AppStack = () => {
 
   const renderScene = BottomNavigation.SceneMap({
     music: MusicRoute,
-    albums: AlbumsRoute,
+    home: HomeComponent,
     profile: ProfileComponent,
   });
 

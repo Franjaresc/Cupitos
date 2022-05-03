@@ -1,8 +1,8 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
-import {TextInput, Button, Text, RadioButton} from 'react-native-paper';
+import { ScrollView, View } from 'react-native';
+import { TextInput, Button, Text, RadioButton } from 'react-native-paper';
 import Styles from '../styles/Styles';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   isDriver,
   changeName,
@@ -19,9 +19,9 @@ import {
   changeHidePassword,
   changeHidePasswordConfirmation,
 } from '../redux/signUpSlice';
-import {signUp} from '../redux/userSlice';
+import { signUp } from '../redux/userSlice';
 
-const SignUp = ({navigation}) => {
+const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
   const isDriverCheck = useSelector(state => state.signUp.driver);
   const name = useSelector(state => state.signUp.name);
@@ -45,7 +45,7 @@ const SignUp = ({navigation}) => {
   const onCheck = value => {
     dispatch(dispatch(isDriver(value)));
   };
-  const driverComponent = conductor => {
+  const DriverComponent = conductor => {
     if (conductor) {
       return (
         <>
@@ -202,7 +202,7 @@ const SignUp = ({navigation}) => {
           style={Styles.radioButton}
         />
       </RadioButton.Group>
-      {driverComponent(isDriverCheck)}
+      {DriverComponent(isDriverCheck)}
       <Button
         mode="contained"
         onPress={() => onPressSignUp()}

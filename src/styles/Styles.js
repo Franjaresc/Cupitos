@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const Styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     justifyContent: 'center',
+    height: '100%',
+    width: '100%',
   },
   input: {
     margin: 10,
@@ -51,8 +52,8 @@ const Styles = StyleSheet.create({
     marginBottom: 10,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
   },
+  
   containerRowCenter: {
     marginTop: 10,
     marginBottom: 10,
@@ -96,25 +97,63 @@ const Styles = StyleSheet.create({
   },
   text: {
     textAlign: 'justify',
-    fontSize: 15,
-    marginBottom: 10,
+    fontSize: 17,
   },
-  textBody: {
-    textAlign: 'justify',
+  textTitle: {
+    textAlign: 'center',
     fontSize: 20,
   },
   editButton: {
     margin: 0,
-    height: 40,
-    width: '70%',
     alignSelf: 'flex-end',
     justifyContent: 'center',
   },
   avatarProfile: {
     margin: 10,
-    height: 100,
-    width: 100,
+    height: 150,
+    width: 150,
     alignSelf: 'center',
+  },
+  publishButton: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    margin: 20,
+  },
+  avatarCupitos: {
+    height: 80,
+    width: 80,
+    alignSelf: 'center',
+  },
+  textTitleCupitos: {
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  textCupitos: {
+    textAlign: 'justify',
+    fontSize: 14,
+  },
+  containerRowCupitos: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#CDCCD7',
+    justifyContent: "space-around",
+  },
+  containerRowSpaceBetweenCupitos: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  containerColumnCupitos: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '50%',
+  },
+  containerRowCupitosButton: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });
 

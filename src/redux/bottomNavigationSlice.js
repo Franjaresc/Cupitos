@@ -3,10 +3,10 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
   isLoading: false,
   error: null,
-  index: 0,
+  index: 1,
   routes: [
     {key: 'music', title: 'Music', icon: 'music-note-outline'},
-    {key: 'albums', title: 'Albums', icon: 'album'},
+    {key: 'home', title: 'Home', icon: 'home'},
     {key: 'profile', title: 'Perfil', icon: 'account'},
   ],
 };

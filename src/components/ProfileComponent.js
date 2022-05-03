@@ -1,55 +1,75 @@
 import React from 'react';
-import {Avatar, Text, Button, Title} from 'react-native-paper';
-import {View} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import { Avatar, Text, Button, Title, List } from 'react-native-paper';
+import { View, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import Styles from '../styles/Styles';
 
+
+
 const ProfileComponent = () => {
-  return (
-    <View style={Styles.container}>
-      <View style={Styles.containerRowSpaceEvenly}>
-        <Avatar.Image
-          size={100}
-          source={{uri: 'https://picsum.photos/200'}}
-          style={Styles.avatarProfile}
-        />
+  const user = useSelector(state => state.user.user);
+
+  const DriverComponent = conductor => {
+    if (conductor) {
+      return (
         <View style={Styles.containerColumn}>
-          <Title>Pepito Perez</Title>
-          <Text>Teléfono: 1234567890</Text>
-          <Text>Carrera: Heladero</Text>
-          <Text>Codigo: A00000001</Text>
-          <Button
-            mode="text"
-            onPress={() => console.log('Editar')}
-            style={Styles.editButton}>
-            Editar
-          </Button>
+          <Title style={Styles.textTitle}>Información del vehiculo</Title>
+          <View style={Styles.containerRowSpaceBetween}>
+            <Text style={Styles.text}>Placa: </Text>
+            <Text style={Styles.text}>{user.carPlate}</Text>
+          </View>
+          <View style={Styles.containerRowSpaceBetween}>
+            <Text style={Styles.text}>Modelo: </Text>
+            <Text style={Styles.text}>{user.carModel}</Text>
+          </View>
+          <View style={Styles.containerRowSpaceBetween}>
+            <Text style={Styles.text}>Color: </Text>
+            <Text style={Styles.text}>{user.carColor}</Text>
+          </View>
         </View>
+      );
+    }
+    else {
+      return null;
+    }
+  };
+
+  return (
+    <ScrollView contentContainerStyle={Styles.scrollView}>
+      <Avatar.Image
+        size={150}
+        source={{ uri: 'https://picsum.photos/200' }}
+        style={Styles.avatarProfile}
+      />
+      <View style={Styles.containerColumn}>
+        <Title style={Styles.textTitle}>{user.name}</Title>
+        <View style={Styles.containerRowSpaceBetween}>
+          <Text style={Styles.text}>Telefono: </Text>
+          <Text style={Styles.text}>{user.telephone}</Text>
+        </View>
+        <View style={Styles.containerRowSpaceBetween}>
+          <Text style={Styles.text}>Carrera: </Text>
+          <Text style={Styles.text}>{user.career}</Text>
+        </View>
+        <View style={Styles.containerRowSpaceBetween}>
+          <Text style={Styles.text}>Codigo: </Text>
+          <Text style={Styles.text}>{user.code}</Text>
+        </View>
+        <Button
+          mode="text"
+          onPress={() => console.log('Editar')}
+          style={Styles.editButton}>
+          Editar
+        </Button>
       </View>
       <View style={Styles.containerColumn}>
-        <Title>Descripción</Title>
+        <Title style={Styles.textTitle}>Descripción</Title>
         <Text style={Styles.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-          euismod, urna eu aliquam consectetur, nisi nisi volutpat nisl, euismod
-          aliquam eros nisl eu nisi.
+          {user.description}
         </Text>
       </View>
-      <View style={Styles.containerColumn}>
-        <Title>Información del vehiculo</Title>
-        <View style={Styles.containerRowSpaceBetween}>
-          <Text style={Styles.textBody}>Placa: </Text>
-          <Text style={Styles.textBody}>A12345</Text>
-        </View>
-        <View style={Styles.containerRowSpaceBetween}>
-          <Text style={Styles.textBody}>Modelo: </Text>
-          <Text style={Styles.textBody}>Toyota Corolla</Text>
-        </View>
-        <View style={Styles.containerRowSpaceBetween}>
-          <Text style={Styles.textBody}>Año: </Text>
-          <Text style={Styles.textBody}>2020</Text>
-        </View>
-      </View>
-    </View>
+      {DriverComponent(user.isDriver)}
+    </ScrollView>
   );
 };
 
