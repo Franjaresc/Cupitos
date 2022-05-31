@@ -1,16 +1,17 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Avatar, TextInput, Button, Text} from 'react-native-paper';
+import { View } from 'react-native';
+import { Avatar, TextInput, Button, Text } from 'react-native-paper';
 import Styles from '../styles/Styles';
-import {useSelector, useDispatch} from 'react-redux';
-import {login} from '../redux/userSlice'; 
-import {changeHidePassword,
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../redux/userSlice';
+import {
+  changeHidePassword,
   changePassword,
   changeEmail,
 } from '../redux/loginSlice';
 
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const dispatch = useDispatch();
   const hidePassword = useSelector(state => state.login.hidePassword);
   const password = useSelector(state => state.login.password);
@@ -32,20 +33,20 @@ const Login = ({navigation}) => {
     <View style={Styles.container}>
       <Avatar.Image
         size={100}
-        source={{uri: 'https://picsum.photos/200'}}
+        source={require('../assets/img/logo.png')}
         style={Styles.logo}
       />
-      <TextInput label="Email" mode="outlined" style={Styles.input} 
+      <TextInput label="Correo electrónico" mode="outlined" style={Styles.input}
         onChangeText={text => dispatch(changeEmail(text))}
         value={email}
       />
       <TextInput
-        label="Password"
+        label="Contraseña"
         secureTextEntry={hidePassword}
         mode="outlined"
         value={password}
         onChangeText={text => dispatch(changePassword(text))}
-        right={<TextInput.Icon 
+        right={<TextInput.Icon
           name={hidePassword ? 'eye' : 'eye-off'}
           onPress={() => dispatch(changeHidePassword(!hidePassword))}
         />}
@@ -55,20 +56,24 @@ const Login = ({navigation}) => {
         mode="contained"
         onPress={() => onPressLogin()}
         style={Styles.logginButton}>
-        Login
+        Iniciar Sesión
       </Button>
       <View style={Styles.containerRowCenter}>
-        <Text>Don't have an account?</Text>
-        <Button mode="text" onPress={() => navigation.navigate('Signup')}>
-          Sign Up
+        <Text>¿No tiene una cuenta?</Text>
+        <Button mode="text"
+          color="#306BAC"
+          onPress={() => navigation.navigate('Signup')}>
+          Registrarse
         </Button>
       </View>
       <View style={Styles.containerRowCenter}>
-        <Text>Forgot your password?</Text>
+        <Text>Olvide mi contraseña</Text>
         <Button
           mode="text"
+          style={Styles.forgotPasswordButton}
+          color="#306BAC"
           onPress={() => navigation.navigate('ForgotPassword')}>
-          Change Password
+          Cambiar contraseña
         </Button>
       </View>
     </View>

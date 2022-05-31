@@ -5,7 +5,7 @@ const initialState = {
   error: null,
   index: 1,
   routes: [
-    {key: 'music', title: 'Music', icon: 'music-note-outline'},
+    {key: 'history', title: 'Historial', icon: 'clipboard-text-clock-outline'},
     {key: 'home', title: 'Home', icon: 'home'},
     {key: 'profile', title: 'Perfil', icon: 'account'},
   ],

@@ -22,6 +22,13 @@ const Styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 20,
     alignSelf: 'center',
+    backgroundColor: '#ffffff',
+  },
+  appbar: {
+    backgroundColor: '#306BAC',
+  },
+  bottomNavigation: {
+    backgroundColor: '#306BAC',
   },
   logginButton: {
     margin: 10,
@@ -29,6 +36,8 @@ const Styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
     justifyContent: 'center',
+    backgroundColor: '#6F9CEB',
+    borderRadius: 27,
   },
   scrollView: {
     flexGrow: 1,
@@ -119,10 +128,11 @@ const Styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     margin: 20,
+    backgroundColor: '#6F9CEB',
   },
   avatarCupitos: {
-    height: 80,
-    width: 80,
+    height: 50,
+    width: 50,
     alignSelf: 'center',
   },
   textTitleCupitos: {
@@ -132,6 +142,7 @@ const Styles = StyleSheet.create({
   textCupitos: {
     textAlign: 'justify',
     fontSize: 14,
+    font: 'normal',
   },
   containerRowCupitos: {
     paddingTop: 10,

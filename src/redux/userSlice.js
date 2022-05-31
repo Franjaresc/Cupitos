@@ -41,6 +41,10 @@ const userSlice = createSlice({
   },
 });
 
+export const {
+  logout,
+} = userSlice.actions;
+
 export const signUp = user => dispatch => {
   dispatch(userSlice.actions.signUpRequest());
   console.log('signUp', user);

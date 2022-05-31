@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { TextInput, Button, Text, RadioButton } from 'react-native-paper';
+import { TextInput, Button, Text, RadioButton, Appbar } from 'react-native-paper';
 import Styles from '../styles/Styles';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -111,111 +111,125 @@ const SignUp = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={Styles.scrollView}>
-      <TextInput
-        label="Nombre"
-        mode="outlined"
-        style={Styles.input}
-        onChangeText={text => dispatch(changeName(text))}
-        value={name}
-      />
-      <TextInput
-        label="Email"
-        mode="outlined"
-        style={Styles.input}
-        onChangeText={text => dispatch(changeEmail(text))}
-        value={email}
-      />
-      <TextInput
-        label="Contraseña"
-        secureTextEntry={hidePassword}
-        mode="outlined"
-        right={
-          <TextInput.Icon
-            name={hidePassword ? 'eye' : 'eye-off'}
-            onPress={() => dispatch(changeHidePassword(!hidePassword))}
-          />
-        }
-        style={Styles.input}
-        onChangeText={text => dispatch(changePassword(text))}
-        value={password}
-      />
-      <TextInput
-        label="Confirmar contraseña"
-        secureTextEntry={hidePasswordConfirmation}
-        mode="outlined"
-        right={
-          <TextInput.Icon
-            name={hidePasswordConfirmation ? 'eye' : 'eye-off'}
-            onPress={() =>
-              dispatch(
-                changeHidePasswordConfirmation(!hidePasswordConfirmation),
-              )
-            }
-          />
-        }
-        style={Styles.input}
-        onChangeText={text => dispatch(changePasswordConfirmation(text))}
-        value={passwordConfirmation}
-      />
-      <TextInput
-        label="Telefono"
-        mode="outlined"
-        style={Styles.input}
-        onChangeText={text => dispatch(changeTelephone(text))}
-        value={telephone}
-      />
-      <TextInput
-        label="Descripción"
-        mode="outlined"
-        multiline={true}
-        style={Styles.inputMultiline}
-        onChangeText={text => dispatch(changeDescription(text))}
-        value={description}
-      />
-      <TextInput
-        label="Carrera"
-        mode="outlined"
-        style={Styles.input}
-        onChangeText={text => dispatch(changeCareer(text))}
-        value={career}
-      />
-      <TextInput
-        label="Codigo"
-        mode="outlined"
-        style={Styles.input}
-        onChangeText={text => dispatch(changeCode(text))}
-        value={code}
-      />
-      <Text style={Styles.textSignUp}>Deseo registrarme como:</Text>
-      <RadioButton.Group
-        onValueChange={value => onCheck(value)}
-        value={isDriverCheck}>
-        <RadioButton.Item
-          label="Cliente"
-          value={false}
-          style={Styles.radioButton}
+    <>
+      <Appbar.Header
+        style={Styles.appbar}
+      >
+        <Appbar.Content title="Registrarse" />
+      </Appbar.Header>
+      <ScrollView contentContainerStyle={Styles.scrollView}>
+
+        <TextInput
+          label="Nombre"
+          mode="outlined"
+          style={Styles.input}
+          onChangeText={text => dispatch(changeName(text))}
+          value={name}
         />
-        <RadioButton.Item
-          label="Conductor"
-          value={true}
-          style={Styles.radioButton}
+        <TextInput
+          label="Email"
+          mode="outlined"
+          style={Styles.input}
+          onChangeText={text => dispatch(changeEmail(text))}
+          value={email}
         />
-      </RadioButton.Group>
-      {DriverComponent(isDriverCheck)}
-      <Button
-        mode="contained"
-        onPress={() => onPressSignUp()}
-        style={Styles.logginButton}>
-        Sign Up
-      </Button>
-      <View style={Styles.containerRowCenter}>
-        <Text>Already have an account?</Text>
-        <Button mode="text" onPress={() => navigation.navigate('Login')}>
-          Login
+        <TextInput
+          label="Contraseña"
+          secureTextEntry={hidePassword}
+          mode="outlined"
+          right={
+            <TextInput.Icon
+              name={hidePassword ? 'eye' : 'eye-off'}
+              onPress={() => dispatch(changeHidePassword(!hidePassword))}
+            />
+          }
+          style={Styles.input}
+          onChangeText={text => dispatch(changePassword(text))}
+          value={password}
+        />
+        <TextInput
+          label="Confirmar contraseña"
+          secureTextEntry={hidePasswordConfirmation}
+          mode="outlined"
+          right={
+            <TextInput.Icon
+              name={hidePasswordConfirmation ? 'eye' : 'eye-off'}
+              onPress={() =>
+                dispatch(
+                  changeHidePasswordConfirmation(!hidePasswordConfirmation),
+                )
+              }
+            />
+          }
+          style={Styles.input}
+          onChangeText={text => dispatch(changePasswordConfirmation(text))}
+          value={passwordConfirmation}
+        />
+        <TextInput
+          label="Telefono"
+          mode="outlined"
+          style={Styles.input}
+          onChangeText={text => dispatch(changeTelephone(text))}
+          value={telephone}
+        />
+        <TextInput
+          label="Descripción"
+          mode="outlined"
+          multiline={true}
+          style={Styles.inputMultiline}
+          onChangeText={text => dispatch(changeDescription(text))}
+          value={description}
+        />
+        <TextInput
+          label="Carrera"
+          mode="outlined"
+          style={Styles.input}
+          onChangeText={text => dispatch(changeCareer(text))}
+          value={career}
+        />
+        <TextInput
+          label="Codigo"
+          mode="outlined"
+          style={Styles.input}
+          onChangeText={text => dispatch(changeCode(text))}
+          value={code}
+        />
+        <Text style={Styles.textSignUp}>Deseo registrarme como:</Text>
+        <RadioButton.Group
+          onValueChange={value => onCheck(value)}
+          value={isDriverCheck}>
+          <RadioButton.Item
+            label="Cliente"
+            value={false}
+            style={Styles.radioButton}
+            uncheckedColor="#306BAC"
+            color='#6F9CEB'
+          />
+          <RadioButton.Item
+            label="Conductor"
+            value={true}
+            uncheckedColor="#306BAC"
+            color="#6F9CEB"
+            style={Styles.radioButton}
+          />
+        </RadioButton.Group>
+        {DriverComponent(isDriverCheck)}
+        <Button
+          mode="contained"
+          onPress={() => onPressSignUp()}
+          style={Styles.logginButton}>
+          Registrarse
         </Button>
-      </View>
-    </ScrollView>
+        <View style={Styles.containerRowCenter}>
+          <Text>Ya tengo una cuenta</Text>
+          <Button mode="text" color="#306BAC" onPress={() => navigation.navigate('Login')}>
+            Iniciar Sesión
+          </Button>
+        </View>
+      </ScrollView>
+    </>
+
+
   );
 };
 

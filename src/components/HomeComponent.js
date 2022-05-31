@@ -1,7 +1,7 @@
 import React from "react";
-import { ScrollView, View, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import Styles from '../styles/Styles';
-import { FAB, Text, Avatar, Title, Button } from 'react-native-paper';
+import { FAB, Text, Avatar, Title, Button, Card, Paragraph } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 
 const data = [
@@ -87,6 +87,7 @@ const PublishCupo = (conductor) => {
                 small={false}
                 icon="plus"
                 onPress={() => console.log('Pressed')}
+                color="white"
             />
         );
     }
@@ -96,53 +97,27 @@ const PublishCupo = (conductor) => {
 };
 
 const CuposList = () => {
+    const LeftContent = () => <Avatar.Image size={50}
+        source={{ uri: 'https://picsum.photos/200' }}
+        style={Styles.avatarCupitos} />
     return (
         <FlatList
             data={data}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => {
                 return (
-                    <View style={Styles.containerRowCupitos}>
-                        <Avatar.Image
-                            size={80}
-                            source={{ uri: 'https://picsum.photos/200' }}
-                            style={Styles.avatarCupitos}
-                        />
-                        <View style={Styles.containerColumnCupitos}>
-                            <Title style={Styles.textTitleCupitos}>{item.name}</Title>
-                            <View style={Styles.containerRowSpaceBetweenCupitos}>
-                                <Text style={Styles.textCupitos}>Hora de salida: </Text>
-                                <Text style={Styles.textCupitos}>{item.hour}</Text>
-                            </View>
-                            <View style={Styles.containerRowSpaceBetweenCupitos}>
-                                <Text style={Styles.textCupitos}>Destino: </Text>
-                                <Text style={Styles.textCupitos}>{item.destination}</Text>
-                            </View>
-                            <View style={Styles.containerRowSpaceBetweenCupitos}>
-                                <Text style={Styles.textCupitos}>Placa: </Text>
-                                <Text style={Styles.textCupitos}>{item.carPlate}</Text>
-                            </View>
-                            <View style={Styles.containerRowSpaceBetweenCupitos}>
-                                <Text style={Styles.textCupitos}>Cupos disponibles: </Text>
-                                <Text style={Styles.textCupitos}>{item.seats}</Text>
-                            </View>
-                            <View style={Styles.containerRowCupitosButton}>
-                                <Button
-                                    mode="text"
-                                    onPress={() => console.log('Editar')}
-                                    style={Styles.editButton}>
-                                    Editar
-                                </Button>
-                                <Button
-                                    mode="text"
-                                    onPress={() => console.log('Editar')}
-                                    style={Styles.editButton}>
-                                    Editar
-                                </Button>
-                            </View>
-
-                        </View>
-                    </View>
+                    <Card>
+                        <Card.Title title={item.name} subtitle={item.hour} left={LeftContent} />
+                        <Card.Cover source={{ uri: 'https://www.tendenciadigital.com.co/wp-content/uploads/2021/06/Mazda-CX30.jpg' }} />
+                        <Card.Content>
+                            <Title>{item.destination}</Title>
+                            <Paragraph>{`Placa del vehiculo: ${item.carPlate}\nNumero de asientos: ${item.seats}`}</Paragraph>
+                        </Card.Content>
+                        <Card.Actions>
+                            <Button color="#306BAC">Cancel</Button>
+                            <Button color="#306BAC">Ok</Button>
+                        </Card.Actions>
+                    </Card>
                 );
             }}
         />

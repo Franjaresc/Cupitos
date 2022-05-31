@@ -58,6 +58,7 @@ const ProfileComponent = () => {
         <Button
           mode="text"
           onPress={() => console.log('Editar')}
+          color="#306BAC"
           style={Styles.editButton}>
           Editar
         </Button>

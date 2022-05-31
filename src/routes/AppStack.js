@@ -1,13 +1,13 @@
 import React from 'react';
-import {BottomNavigation, Text} from 'react-native-paper';
+import { BottomNavigation, Appbar } from 'react-native-paper';
 import ProfileComponent from '../components/ProfileComponent';
 import HomeComponent from '../components/HomeComponent';
-import {useSelector, useDispatch} from 'react-redux';
-import {onIndexChange} from '../redux/bottomNavigationSlice';
+import HistoryComponent from '../components/HistoryComponent';
+import { useSelector, useDispatch } from 'react-redux';
+import { onIndexChange } from '../redux/bottomNavigationSlice';
+import { logout } from '../redux/userSlice';
+import Styles from '../styles/Styles';
 
-const MusicRoute = () => <Text>Music</Text>;
-
-const AlbumsRoute = () => <Text>Albums</Text>;
 
 
 const AppStack = () => {
@@ -16,17 +16,26 @@ const AppStack = () => {
   const routes = useSelector(state => state.bottomNavigation.routes);
 
   const renderScene = BottomNavigation.SceneMap({
-    music: MusicRoute,
+    history: HistoryComponent,
     home: HomeComponent,
     profile: ProfileComponent,
   });
 
   return (
-    <BottomNavigation
-      navigationState={{index, routes}}
-      onIndexChange={i => dispatch(onIndexChange(i))}
-      renderScene={renderScene}
-    />
+    <>
+      <Appbar.Header
+        style={Styles.appbar}
+      >
+        <Appbar.Content title="Cupitos" subtitle={'Cupos seguros transportes seguros'} />
+        <Appbar.Action icon="logout-variant" onPress={() => dispatch(logout())} />
+      </Appbar.Header>
+      <BottomNavigation
+        navigationState={{ index, routes }}
+        onIndexChange={i => dispatch(onIndexChange(i))}
+        renderScene={renderScene}
+        barStyle={Styles.bottomNavigation}
+      />
+    </>
   );
 };
 
